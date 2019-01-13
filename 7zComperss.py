@@ -6,15 +6,22 @@ import sys
 
 import datetime
 import subprocess
-print("current encoding : %s " % sys.stdout.encoding)
-print ("current dir: %s" % (os.getcwd()))
+
 
 cmd_7z="7z a "
 space = " "
+PATH_7Z = "C:\\Program Files\\7-Zip"
+
+def check_7z_path(path):
+    if(False == os.path.isdir(path)):
+        print("%s not exist" % path)
+        print("please install 7z !")
+    else:
+        print("%s exist" % path)
+
 def Get_time():
     now = datetime.datetime.now()
     return now.strftime("%Y_%m_%d_%H_%M")
-print ("Current date and time using strftime: %s" % Get_time())
 
 def compress_file(path):
     file_name = path.split('\\')
@@ -28,12 +35,11 @@ def pause():
 
 
 def main():
+    check_7z_path(PATH_7Z)
     compress_path=input("please input comperss path:")
     # compress_path=os.getcwd()
-    print(compress_path)
+    print("compess path is : %s" % compress_path)
     compress_file(compress_path)
-
-
 
 main()
 pause()
